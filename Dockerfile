@@ -24,8 +24,10 @@ RUN cd /tmp/ \
        sudo ln -sfn /usr/local/bin/python3.8 /usr/bin/python3.8 \
        sudo ln -sfn /usr/local/bin/pip3.8 /usr/bin/pip3.8 \
        python3.8 -V
-    
-
+RUN alias python='/usr/bin/python3.8' \
+    alias python3='/usr/bin/python3.8' \
+    . ~/.bashrc
+ 
 
 # Install packages needed for ROOT
 RUN yum -y install python3-pip root which python3-root python3-devel
