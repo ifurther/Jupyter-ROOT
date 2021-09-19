@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:8
 
 USER root
 
@@ -7,30 +7,16 @@ WORKDIR /work
 # Install CentOS 7 packages  
 RUN yum -y update
 RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum -y install centos-release-scl
+#RUN yum -y install centos-release-scl
 
 # Install g++ version 7 as version 11 not working for now
 RUN yum -y install devtoolset-7-gcc*
 SHELL [ "/usr/bin/scl", "enable", "devtoolset-7"]
 
-# Install python 3.8
-RUN yum -y install wget make gcc openssl-devel bzip2-devel
-RUN cd /tmp/ \
-       wget https://www.python.org/ftp/python/3.8.7/Python-3.8.7.tgz \
-       tar xzf Python-3.8.7.tgz \
-       cd Python-3.8.7 \
-       ./configure --enable-optimizations \
-       sudo make altinstall \
-       sudo ln -sfn /usr/local/bin/python3.8 /usr/bin/python3.8 \
-       sudo ln -sfn /usr/local/bin/pip3.8 /usr/bin/pip3.8 \
-       python3.8 -V
-RUN alias python='/usr/bin/python3.8' \
-    alias python3='/usr/bin/python3.8' \
-    . ~/.bashrc
  
 
 # Install packages needed for ROOT
-RUN yum -y install python3-pip root which python3-root python3-devel
+RUN yum -y install python3 python3-pip root which python3-root python3-devel
 RUN yum -y install root-tmva root-tmva-python root-minuit2 python3-jupyroot
 
 # Install curl
