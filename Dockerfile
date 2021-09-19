@@ -1,5 +1,7 @@
 FROM centos:7
 
+USER root
+
 WORKDIR /work
 
 # Install CentOS 7 packages  
@@ -11,8 +13,22 @@ RUN yum -y install centos-release-scl
 RUN yum -y install devtoolset-7-gcc*
 SHELL [ "/usr/bin/scl", "enable", "devtoolset-7"]
 
+# Install python 3.8
+RUN yum -y install wget make gcc openssl-devel bzip2-devel
+RUN cd /tmp/ \
+       wget https://www.python.org/ftp/python/3.8.7/Python-3.8.7.tgz \
+       tar xzf Python-3.8.7.tgz \
+       cd Python-3.8.7 \
+       ./configure --enable-optimizations \
+       sudo make altinstall \
+       sudo ln -sfn /usr/local/bin/python3.8 /usr/bin/python3.8 \
+       sudo ln -sfn /usr/local/bin/pip3.8 /usr/bin/pip3.8 \
+       python3.8 -V
+    
+
+
 # Install packages needed for ROOT
-RUN yum -y install python3 python3-pip root which python3-root python3-devel
+RUN yum -y install python3-pip root which python3-root python3-devel
 RUN yum -y install root-tmva root-tmva-python root-minuit2 python3-jupyroot
 
 # Install curl
@@ -29,7 +45,7 @@ RUN ln -sf /usr/bin/cmake3 /usr/bin/cmake
 # Install and upgrade some python packages
 RUN pip3 install --upgrade wheel
 #RUN pip3 install --upgrade jupyter
-RUN pip3 install  numpy==1.18.1 scipy matplotlib 
+RUN pip3 install  numpy scipy matplotlib 
 RUN pip3 install  jupyterlab
 RUN pip3 install  iminuit pandas sympy terminado urllib3 pycurl tables
 RUN pip3 install  rootpy rootkernel root-numpy uproot
