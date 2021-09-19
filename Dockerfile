@@ -28,7 +28,7 @@ RUN ln -sf /usr/bin/cmake3 /usr/bin/cmake
 
 # Install and upgrade some python packages
 RUN pip3 install --upgrade wheel
-RUN pip3 install --upgrade jupyter
+#RUN pip3 install --upgrade jupyter
 RUN pip3 install --upgrade numpy scipy matplotlib 
 RUN pip3 install --upgrade jupyterlab
 RUN pip3 install --upgrade iminuit pandas sympy terminado urllib3 pycurl tables
