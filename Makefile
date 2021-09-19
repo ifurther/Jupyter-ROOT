@@ -8,7 +8,7 @@ build:
     docker build --no-cache -t $(IMAGE_NAME):$(IMAGE_VERSION) -t $(IMAGE_NAME):latest .
 
 .PHONY: multi-build
-build:
+multi-build:
     docker buildx build --platform linux/amd64,linux/arm64 --no-cache -t $(IMAGE_NAME):$(IMAGE_VERSION) -t $(IMAGE_NAME):latest .
 
 
