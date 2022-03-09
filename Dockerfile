@@ -32,7 +32,7 @@ RUN pip3 install --upgrade wheel
 RUN pip3 install --upgrade jupyter
 RUN pip3 install --upgrade numpy scipy matplotlib 
 RUN pip3 install --upgrade jupyterlab
-RUN pip3 install --upgtade nbdime
+RUN pip3 install --upgtade nbdime jupyterlab-git
 RUN pip3 install --upgrade iminuit pandas sympy terminado urllib3 pycurl tables
 RUN pip3 install --upgrade rootpy rootkernel root-numpy uproot
 
